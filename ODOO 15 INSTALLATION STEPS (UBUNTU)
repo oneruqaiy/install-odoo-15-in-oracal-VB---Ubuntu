@@ -1,0 +1,96 @@
+ODOO 15 INSTALLATION STEPS (UBUNTU)
+
+
+1) Update the system.
+
+sudo apt-get update
+sudo apt-get upgrade
+
+
+2) Make sure that the server is accessible remotely.
+
+sudo apt-get install openssh-server fail2ban
+
+
+3) Create a system user for Odoo with the home directory /opt/odoo.
+
+sudo adduser --system --home=/opt/odoo15--group odoo15
+
+
+4)Install postgreSQL.
+
+sudo apt-get install postgresql
+
+
+
+5)Switch to postgres user.
+
+sudo su – postgres
+
+
+6) Create a postgres user for Odoo15.
+
+createuser --createdb --username postgres --no-createrole --no-superuser --pwprompt odoo
+
+
+7) Give access to the user as Super user by running the following two commands.
+
+psql
+ALTER USER odoo15 WITH SUPERUSER;
+\q
+
+8) Exit from Postgres.
+
+exit
+
+
+9) Install github(If not installed).
+
+sudo apt-get install git
+
+10) Clone the Odoo(Take care of the version. Here we clone Odoo version 15.0).
+
+git clone https://www.github.com/odoo/odoo --depth 1 --branch 15.0 --single-branch /home/ruqaiya/odoo15( use your directry)
+
+11) Check all the folders and files are fetched from Odoo Github account.
+
+cd odoo15/
+ls
+
+12) Install python pip3 for installing Odoo dependencies and packages.
+
+sudo apt-get install -y python3-pip
+
+
+13) Run the requirement.txt file to install all the odoo required dependencies and packages in one command.
+
+
+sudo apt-get install libxml2-dev libxslt1-dev
+sudo apt install libpq-dev
+sudo apt-get install libsasl2-dev python-dev libldap2-dev libssl-dev
+
+sudo pip3 install -r requirements.txt
+
+***
+Use if not install with sudo :
+
+pip3 install -r requirements.txt
+***
+
+
+14) Install the following web dependencies.
+
+sudo apt-get install -y npm
+
+sudo npm install -g less less-plugin-clean-css
+/usr/local/bin/lessc -> /usr/local/lib/node_modules/less/bin/lessc
+
+sudo apt-get install -y node-less
+
+15) Install wkhtmltopdf in order to get reports in PDF formats by running the following commands.
+
+sudo wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
+sudo apt install -f 
+sudo dpkg -i wkhtmltox_0.12.5-1.bionic_amd64.deb
+sudo apt install -f
+sudo dpkg -i wkhtmltox_0.12.5-1.bionic_amd64.deb
